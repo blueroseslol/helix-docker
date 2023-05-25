@@ -11,8 +11,8 @@ LABEL maintainer="Joe Chen (joe@sourcegraph.com)"
 RUN \
   apt-get update && \
   apt-get install -y wget gnupg2 && \
-  wget -qO - https://package.perforce.com/perforce.pubkey | apt-key add - && \
-  echo "deb http://package.perforce.com/apt/ubuntu focal release" > /etc/apt/sources.list.d/perforce.list && \
+  wget -qO - https://package.perforce.com/perforce.pubkey | gpg --dearmor | tee /usr/share/keyrings/perforce.gpg && \
+  echo "deb [signed-by=/usr/share/keyrings/perforce.gpg] http://package.perforce.com/apt/ubuntu focal release" > /etc/apt/sources.list.d/perforce.list && \
   apt-get update
 
 # --------------------------------------------------------------------------------
@@ -21,8 +21,8 @@ RUN \
 
 # Create perforce user and install Perforce Server
 RUN \
-  apt-get install -y helix-p4d=2020.2-2075706~focal && \
-  apt-get install -y helix-swarm-triggers=2020.2-2065513~focal
+  apt-get install -y helix-p4d && \
+  apt-get install -y helix-swarm-triggers
 
 # Add external files
 COPY files/restore.sh /usr/local/bin/restore.sh
