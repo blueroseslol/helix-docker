@@ -25,16 +25,17 @@ RUN \
   apt-get install -y helix-swarm-triggers
 
 # Add external files
-COPY files/restore.sh /usr/local/bin/restore.sh
-COPY files/setup.sh /usr/local/bin/setup.sh
-COPY files/init.sh /usr/local/bin/init.sh
-COPY files/latest_checkpoint.sh /usr/local/bin/latest_checkpoint.sh
+WORKDIR /files
+COPY restore.sh /usr/bin/restore.sh
+COPY setup.sh /usr/bin/setup.sh
+COPY init.sh /usr/bin/init.sh
+COPY latest_checkpoint.sh /usr/bin/latest_checkpoint.sh
 
 RUN \
-  chmod +x /usr/local/bin/restore.sh && \
-  chmod +x /usr/local/bin/setup.sh && \
-  chmod +x /usr/local/bin/init.sh && \
-  chmod +x /usr/local/bin/latest_checkpoint.sh
+  chmod +x /usr/bin/restore.sh && \
+  chmod +x /usr/bin/setup.sh && \
+  chmod +x /usr/bin/init.sh && \
+  chmod +x /usr/bin/latest_checkpoint.sh
 
 # --------------------------------------------------------------------------------
 # Docker ENVIRONMENT
