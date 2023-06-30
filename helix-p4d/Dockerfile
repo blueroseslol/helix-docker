@@ -25,11 +25,10 @@ RUN \
   apt-get install -y helix-swarm-triggers
 
 # Add external files
-WORKDIR /files
-COPY restore.sh /usr/bin/restore.sh
-COPY setup.sh /usr/bin/setup.sh
-COPY init.sh /usr/bin/init.sh
-COPY latest_checkpoint.sh /usr/bin/latest_checkpoint.sh
+COPY ./files/restore.sh /usr/bin/restore.sh
+COPY ./files/setup.sh /usr/bin/setup.sh
+COPY ./files/init.sh /usr/bin/init.sh
+COPY ./files/latest_checkpoint.sh /usr/bin/latest_checkpoint.sh
 
 RUN \
   chmod +x /usr/bin/restore.sh && \
